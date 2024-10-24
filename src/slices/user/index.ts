@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import type {IUser, IUserState} from './types';
+import { removeRefreshToken } from '@/utils';
 
 const initialState: IUserState = {
   user: null,
@@ -13,6 +14,7 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logout(state) {
+      removeRefreshToken();
       state.user = null;
     },
   },
