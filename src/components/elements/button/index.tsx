@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, StyleSheet, Pressable, ActivityIndicator} from 'react-native';
 import type {IButtonProps} from './types';
 
-export const Button = ({
+const Button = ({
   children,
   onClick,
   disabled,
@@ -22,6 +22,8 @@ export const Button = ({
     </Pressable>
   );
 };
+
+export default Button;
 
 const styles = StyleSheet.create({
   button: {

@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator<LoginStackParamList>();
 
 export default function LoginStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName={RouteNames.signIn}>
       <Stack.Screen
         name={RouteNames.signIn}
         component={SignInScreen as React.ComponentType}
