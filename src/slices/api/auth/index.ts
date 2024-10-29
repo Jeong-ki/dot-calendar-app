@@ -7,11 +7,15 @@ import type {
   ISignUpRes,
   ISignUpReq,
 } from './types';
+import { BASE_URL } from '@/utils';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com' }),
+  baseQuery: fetchBaseQuery({baseUrl: BASE_URL}),
   endpoints: builder => ({
+    getDummyUser: builder.query<any, void>({
+      query: () => ({url: '/users'}),
+    }),
     getDummy: builder.query<any, void>({
       query: () => ({url: '/todos/1'}),
     }),
@@ -43,6 +47,7 @@ export const authApi = createApi({
 });
 
 export const {
+  useGetDummyUserQuery,
   useGetDummyQuery,
   useGetMyInfoQuery,
   useRefreshUserMutation,

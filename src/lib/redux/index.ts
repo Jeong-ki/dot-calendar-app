@@ -1,79 +1,95 @@
 import type { RootState } from '@/store/reducer';
-import { getRefreshToken, setRefreshToken } from '@/utils';
+import { getRefreshToken, logError, setRefreshToken } from '@/utils';
+import { SerializedError } from '@reduxjs/toolkit';
 import { fetchBaseQuery, type BaseQueryFn, type FetchArgs, type FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://your-base-url.com',
-  prepareHeaders: (headers, { getState }) => {
-    const accessToken = (getState() as RootState).user.user?.accessToken;
-    if (accessToken) {
-      headers.set('Authorization', `Bearer ${accessToken}`);
-    }
-    headers.set('Content-Type', 'application/json');
-    return headers;
-  },
-});
+type CustomBaseQueryArgs = { baseUrl: string };
 
-// 리프레시 토큰 갱신 함수
-const handleTokenRefresh = async (api: any, extraOptions: any) => {
-  const refreshToken = await getRefreshToken();
+type CustomBaseQuery = BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError | SerializedError
+>;
 
-  if (refreshToken) {
-    const refreshResult = await baseQuery({
-      url: '/auth/refresh-token',
-      method: 'POST',
-      body: { refreshToken },
-    }, api, extraOptions);
+interface RefreshResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
-    if (refreshResult.data) {
-      const { accessToken: newAccessToken, refreshToken: newRefreshToken } = refreshResult.data as {
-        accessToken: string;
-        refreshToken: string;
-      };
+enum UserActionTypes {
+  SetUser = 'user/setUser',
+  Logout = 'user/logout'
+}
 
-      const currentUserData = (api.getState() as RootState).user.user;
-      if (currentUserData) {
-        // Redux에 새 액세스 토큰 저장
-        api.dispatch({
-          type: 'user/setUser',
-          payload: { ...currentUserData, accessToken: newAccessToken },
-        });
 
-        // EncryptedStorage에 새 리프레시 토큰 저장
-        await setRefreshToken(newRefreshToken);
+const tokenBaseQuery = ({ baseUrl }: CustomBaseQueryArgs): CustomBaseQuery => {
+  const baseQuery = fetchBaseQuery({
+    baseUrl,
+    prepareHeaders: (headers, { getState }) => {
+      const accessToken = (getState() as RootState).user.user?.accessToken;
+      if (accessToken) {
+        headers.set('authorization', `Bearer ${accessToken}`);
       }
+      return headers;
+    },
+  });
 
-      return newAccessToken;
-    } else {
-      api.dispatch({ type: 'user/logout' });
+  return async (args, api, extraOptions) => {
+    let result = await baseQuery(args, api, extraOptions);
+
+    if (result.error && result.error.status === 401) {
+      // 액세스 토큰이 만료된 경우
+      const refreshToken = await getRefreshToken();
+      if (refreshToken) {
+        // 기존 baseUrl로 리프레시 토큰을 사용하여 새 토큰 요청
+        const refreshResult = await baseQuery(
+          {
+            url: '/auth/refresh-token',
+            method: 'POST',
+            body: { refreshToken },
+          },
+          api,
+          extraOptions
+        );
+
+        if (refreshResult.data) {
+          const { accessToken: newAccessToken, refreshToken: newRefreshToken } = refreshResult.data as RefreshResponse;
+          const currentUserData = (api.getState() as RootState).user.user;
+          if (currentUserData) {
+            // 새 액세스 토큰과 리프레시 토큰을 상태에 저장
+            api.dispatch({
+              type: UserActionTypes.SetUser,
+              payload: { ...currentUserData, accessToken: newAccessToken },
+            });
+
+            // 리프레시 토큰도 저장하는 로직 추가
+            await setRefreshToken(newRefreshToken);
+          }
+
+          // 헤더에 새로운 토큰을 넣고 다시 요청
+          if (typeof args === 'object') {
+            result = await baseQuery({
+              ...args,
+              headers: {
+                ...(args.headers ?? {}),
+                authorization: `Bearer ${newAccessToken}`,
+              },
+            }, api, extraOptions);
+          }
+        } else {
+          // 리프레시 토큰 요청이 실패한 경우 에러 반환
+          api.dispatch({ type: UserActionTypes.Logout });
+          logError('Refresh token request failed', refreshResult.error);
+          return refreshResult;
+        }
+      } else {
+        // 리프레시 토큰이 없는 경우 에러 로그 추가
+        logError('No refresh token available', result.error);
+      }
     }
-  } else {
-    api.dispatch({ type: 'user/logout' });
-  }
-  return null;
+
+    return result;
+  };
 };
 
-// 커스텀 baseQuery 함수
-const baseQueryWithToken: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions
-) => {
-  let result = await baseQuery(args, api, extraOptions);
-
-  // 401 에러가 발생하면 리프레시 토큰을 이용하여 새 토큰 갱신
-  if (result.error && result.error.status === 401) {
-    const newAccessToken = await handleTokenRefresh(api, extraOptions);
-
-    if (newAccessToken) {
-      // 갱신된 토큰으로 다시 API 요청 재시도
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      return { error: { status: 401, data: 'Unauthorized' } };
-    }
-  }
-
-  return result;
-};
-
-export default baseQueryWithToken;
+export default tokenBaseQuery;

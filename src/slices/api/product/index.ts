@@ -1,9 +1,11 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {createApi} from '@reduxjs/toolkit/query/react';
 import type {Product} from './types';
+import tokenBaseQuery from '@/lib/redux';
+import { BASE_URL } from '@/utils';
 
 export const productApi = createApi({
   reducerPath: 'productApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com' }),
+  baseQuery: tokenBaseQuery({baseUrl: BASE_URL}),
   endpoints: builder => ({
     getAllProducts: builder.query<Array<Product>, void>({
       query: () => ({url: '/product'}),
