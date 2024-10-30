@@ -1,0 +1,108 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "unused-imports",
+    "react-native"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
+  },
+  "env": {
+    // "browser": true,
+    "node": true,
+    "es6": true,
+    "react-native/react-native": true
+  },
+  "ignorePatterns": [
+    "node_modules/"
+  ],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "plugin:react-native/all"
+  ],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {},
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "react/button-has-type": "off",
+    "no-console": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-array-index-key": "off",
+    "global-require": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "react/jsx-no-constructed-context-values": "off",
+    "react/function-component-definition": "off",
+    "import/no-cycle": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-nested-ternary": "off",
+    "no-unused-vars": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "no-useless-catch": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "react-native/no-inline-styles": "warn",
+    "react-native/no-unused-styles": "warn",
+    "react-native/split-platform-components": "warn",
+    "react-native/no-color-literals": "off",
+    "react-native/no-raw-text": [
+      "error",
+      {
+        "skip": [
+          "Text",
+          "TextInput"
+        ]
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state"
+        ]
+      }
+    ],
+    "react/destructuring-assignment": "off"
+  }
+}

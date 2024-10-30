@@ -1,7 +1,12 @@
+import { SerializedError } from '@reduxjs/toolkit';
+import {
+  fetchBaseQuery,
+  type BaseQueryFn,
+  type FetchArgs,
+  type FetchBaseQueryError,
+} from '@reduxjs/toolkit/query';
 import type { RootState } from '@/store/reducer';
 import { getRefreshToken, logError, setRefreshToken } from '@/utils';
-import { SerializedError } from '@reduxjs/toolkit';
-import { fetchBaseQuery, type BaseQueryFn, type FetchArgs, type FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 type CustomBaseQueryArgs = { baseUrl: string };
 
@@ -18,9 +23,8 @@ interface RefreshResponse {
 
 enum UserActionTypes {
   SetUser = 'user/setUser',
-  Logout = 'user/logout'
+  Logout = 'user/logout',
 }
-
 
 const tokenBaseQuery = ({ baseUrl }: CustomBaseQueryArgs): CustomBaseQuery => {
   const baseQuery = fetchBaseQuery({
@@ -49,11 +53,12 @@ const tokenBaseQuery = ({ baseUrl }: CustomBaseQueryArgs): CustomBaseQuery => {
             body: { refreshToken },
           },
           api,
-          extraOptions
+          extraOptions,
         );
 
         if (refreshResult.data) {
-          const { accessToken: newAccessToken, refreshToken: newRefreshToken } = refreshResult.data as RefreshResponse;
+          const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+            refreshResult.data as RefreshResponse;
           const currentUserData = (api.getState() as RootState).user.user;
           if (currentUserData) {
             // 새 액세스 토큰과 리프레시 토큰을 상태에 저장
@@ -68,13 +73,17 @@ const tokenBaseQuery = ({ baseUrl }: CustomBaseQueryArgs): CustomBaseQuery => {
 
           // 헤더에 새로운 토큰을 넣고 다시 요청
           if (typeof args === 'object') {
-            result = await baseQuery({
-              ...args,
-              headers: {
-                ...(args.headers ?? {}),
-                authorization: `Bearer ${newAccessToken}`,
+            result = await baseQuery(
+              {
+                ...args,
+                headers: {
+                  ...(args.headers ?? {}),
+                  authorization: `Bearer ${newAccessToken}`,
+                },
               },
-            }, api, extraOptions);
+              api,
+              extraOptions,
+            );
           }
         } else {
           // 리프레시 토큰 요청이 실패한 경우 에러 반환
@@ -84,6 +93,7 @@ const tokenBaseQuery = ({ baseUrl }: CustomBaseQueryArgs): CustomBaseQuery => {
         }
       } else {
         // 리프레시 토큰이 없는 경우 에러 로그 추가
+        api.dispatch({ type: UserActionTypes.Logout });
         logError('No refresh token available', result.error);
       }
     }

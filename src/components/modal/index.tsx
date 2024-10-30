@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   Keyboard,
@@ -25,18 +25,12 @@ export const Modal = () => {
   };
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setKeyboardVisible(true);
-      },
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setKeyboardVisible(false);
-      },
-    );
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardVisible(true);
+    });
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false);
+    });
 
     return () => {
       keyboardDidShowListener.remove();
@@ -62,31 +56,31 @@ export const Modal = () => {
 };
 
 const styles = StyleSheet.create({
+  innerContent: {
+    backgroundColor: 'pink',
+    flex: 1,
+  },
+  keyboardAvoidingView: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 15,
+  },
   modal: {
     backgroundColor: 'rgba(52, 52, 52, 0.4)',
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
     alignItems: 'center',
-  },
-  keyboardAvoidingView: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 15,
   },
   modalInner: {
     backgroundColor: 'orange',
-    height: 350,
-    width: Dimensions.get('window').width - 50,
     borderRadius: 20,
-    paddingVertical: 10,
+    height: 350,
     paddingHorizontal: 20,
+    paddingVertical: 10,
+    width: Dimensions.get('window').width - 50,
   },
   modalTitle: {
     alignItems: 'center',
-  },
-  innerContent: {
-    flex: 1,
-    backgroundColor: 'pink',
   },
 });

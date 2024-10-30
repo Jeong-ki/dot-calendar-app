@@ -1,8 +1,8 @@
 import React from 'react';
-import type {StackParamList} from './types';
-import {HomeScreen, UserScreen} from '@/screens';
-import {RouteNames} from './route-names';
+import { HomeScreen, UserScreen } from '@/screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import type { StackParamList } from './types';
+import { RouteNames } from './route-names';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -12,12 +12,12 @@ export default function AppStack() {
       <Stack.Screen
         name={RouteNames.home}
         component={HomeScreen as React.ComponentType}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={RouteNames.user}
         component={UserScreen as React.ComponentType}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

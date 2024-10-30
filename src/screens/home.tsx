@@ -1,9 +1,13 @@
 import React from 'react';
-import { HomeScreenProps } from '@/navigation/types';
 import { Text, View } from 'react-native';
+import { HomeScreenProps } from '@/navigation/types';
 
-const HomeScreen = ({}: HomeScreenProps) => {
-  return <View><Text>Home</Text></View>;
+const HomeScreen = ({ navigation }: HomeScreenProps) => {
+  return (
+    <View>
+      <Text>Home</Text>
+    </View>
+  );
 };
 
 export default HomeScreen;

@@ -1,5 +1,5 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RouteNames} from './route-names';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RouteNames } from './route-names';
 
 export type StackParamList = {
   [RouteNames.home]: undefined;
@@ -11,22 +11,10 @@ export type LoginStackParamList = {
   [RouteNames.signUp]: undefined;
 };
 
-export type HomeScreenProps = NativeStackScreenProps<
-  StackParamList,
-  RouteNames.home
->;
+export type HomeScreenProps = NativeStackScreenProps<StackParamList, RouteNames.home>;
 
-export type UserScreenProps = NativeStackScreenProps<
-  StackParamList,
-  RouteNames.user
->;
+export type UserScreenProps = NativeStackScreenProps<StackParamList, RouteNames.user>;
 
-export type SignInScreenProps = NativeStackScreenProps<
-  LoginStackParamList,
-  RouteNames.signIn
->;
+export type SignInScreenProps = NativeStackScreenProps<LoginStackParamList, RouteNames.signIn>;
 
-export type SignUpScreenProps = NativeStackScreenProps<
-  LoginStackParamList,
-  RouteNames.signUp
->;
+export type SignUpScreenProps = NativeStackScreenProps<LoginStackParamList, RouteNames.signUp>;

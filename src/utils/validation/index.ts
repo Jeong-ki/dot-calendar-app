@@ -1,4 +1,4 @@
-import type {ISignInState, ISignUpState} from './types';
+import type { ISignInState, ISignUpState } from './types';
 
 export const validateEmail = (email: string): boolean => {
   const regex =

@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['module:@react-native/babel-preset'],
+  presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     [
       'module-resolver',
@@ -8,6 +8,7 @@ module.exports = {
         alias: {
           '@': './src',
         },
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'], // 추가 확장자 명시
       },
     ],
   ],
