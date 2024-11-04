@@ -103,6 +103,7 @@
         ]
       }
     ],
-    "react/destructuring-assignment": "off"
+    "react/destructuring-assignment": "off",
+    "allowForLoopAfterthoughts": true
   }
 }

@@ -5,7 +5,7 @@ import ErrorScreen from '../error';
 const resetErrorMock = jest.fn();
 const component = <ErrorScreen resetError={resetErrorMock} />;
 
-describe('Product list screen', () => {
+describe('ErrorScreen', () => {
   it('should display loading indicator on mount', async () => {
     render(component);
 

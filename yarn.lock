@@ -2695,9 +2695,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react-native@npm:^12.7.2":
-  version: 12.7.2
-  resolution: "@testing-library/react-native@npm:12.7.2"
+"@testing-library/react-native@npm:^12.8.1":
+  version: 12.8.1
+  resolution: "@testing-library/react-native@npm:12.8.1"
   dependencies:
     jest-matcher-utils: ^29.7.0
     pretty-format: ^29.7.0
@@ -2710,7 +2710,7 @@ __metadata:
   peerDependenciesMeta:
     jest:
       optional: true
-  checksum: 7e3d8ab7d549823fcf438c17353e6c40386da88bbb1edfbd0747282a28c673597be27fdc2fa1f3a7d8786b77c72bb2e37f67ad2c9134225e9b68db97838f77e2
+  checksum: 6f57fb2ea0cf70bf8882418c610b115b8a3deff908790ca54f10898c25e8158b19b5cdafe1ed24df9de9336699694baa919e2a64602a09e50710958432b493e9
   languageName: node
   linkType: hard
 
@@ -4507,6 +4507,7 @@ __metadata:
   resolution: "dot-calendar-app@workspace:."
   dependencies:
     "@babel/core": ^7.20.0
+    "@babel/plugin-transform-private-methods": ^7.25.9
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
     "@react-native/babel-preset": 0.75.4
@@ -4516,7 +4517,7 @@ __metadata:
     "@react-navigation/native": ^6.1.18
     "@react-navigation/native-stack": ^6.11.0
     "@reduxjs/toolkit": ^2.3.0
-    "@testing-library/react-native": ^12.7.2
+    "@testing-library/react-native": ^12.8.1
     "@types/jest": ^29.5.14
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0

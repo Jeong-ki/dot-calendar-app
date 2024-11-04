@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen renders without crashing 1`] = `
+<View>
+  <Text>
+    Home
+  </Text>
+  <Text>
+    Initial Value
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "backgroundColor": "#42a5f5",
+          "borderRadius": 5,
+          "height": 40,
+          "justifyContent": "center",
+          "marginBottom": 5,
+          "paddingHorizontal": 20,
+          "paddingVertical": 10,
+        },
+        {
+          "width": 100,
+        },
+        false,
+      ]
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#fff",
+          "fontSize": 16,
+        }
+      }
+    >
+      First
+    </Text>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "backgroundColor": "#42a5f5",
+          "borderRadius": 5,
+          "height": 40,
+          "justifyContent": "center",
+          "marginBottom": 5,
+          "paddingHorizontal": 20,
+          "paddingVertical": 10,
+        },
+        {
+          "width": 100,
+        },
+        false,
+      ]
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#fff",
+          "fontSize": 16,
+        }
+      }
+    >
+      Second
+    </Text>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "backgroundColor": "#42a5f5",
+          "borderRadius": 5,
+          "height": 40,
+          "justifyContent": "center",
+          "marginBottom": 5,
+          "paddingHorizontal": 20,
+          "paddingVertical": 10,
+        },
+        {
+          "width": 100,
+        },
+        false,
+      ]
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#fff",
+          "fontSize": 16,
+        }
+      }
+    >
+      Go User
+    </Text>
+  </View>
+</View>
+`;
